@@ -1,6 +1,7 @@
 {
   "name": "ra16-redux-filter",
   "version": "0.1.0",
+  "homepage": "https://errand.github.io/ra16-redux-filter/",
   "private": true,
   "dependencies": {
     "@faker-js/faker": "^6.3.1",
