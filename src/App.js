@@ -8,8 +8,10 @@ const App = () => {
   return (
     <div className="tasks container">
       <h1 className="title">Tasks</h1>
-      <Form />
-      <Filter />
+      <div className="d-flex justify-content-between">
+        <Form />
+        <Filter />
+      </div>
       <TasksList />
     </div>
   );

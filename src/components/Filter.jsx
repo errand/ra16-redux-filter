@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import { filterAction } from "../redux/filterSlice";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import { filterAction } from "../redux/tasksSlice";
 
 export default function Filter() {
   const [keyword, setKeyword] = useState('');
@@ -12,14 +12,20 @@ export default function Filter() {
     dispatch(filterAction({keyword}));
   };
 
+  const onClear = (event) => {
+    event.preventDefault();
+    setKeyword('')
+    dispatch(filterAction(''));
+  }
+
   return (
-    <form className="form mb-3" onSubmit={onSearch}>
+    <form className="form mb-lg-3" onSubmit={onSearch}>
       <div className="row">
         <div className="col-auto">
           <input
             type="text"
             className="form-control"
-            placeholder="Add price"
+            placeholder="Keyword"
             value={keyword}
             onChange={(event) => setKeyword(event.target.value)}
           ></input>
@@ -27,6 +33,9 @@ export default function Filter() {
         <div className="col-auto">
           <button className="btn btn-success">Search </button>
         </div>
+        {(keyword && <div className="col-auto">
+          <button className="btn btn-warning" onClick={onClear}>Clear</button>
+        </div>) }
       </div>
 
     </form>

@@ -5,19 +5,15 @@ import PropTypes from 'prop-types'
 export default function Task({ id, title, price }) {
   const dispatch = useDispatch();
 
-  const deleteTask = id => dispatch(deleteAction({id: id}))
-  const editTask = id => dispatch(editAction({id: id}))
+  const editTask = id => dispatch(editAction({id: id}));
+  const deleteTask = id => dispatch(deleteAction({id: id}));
 
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
-      <div className="me-auto">
-        <div className="fw-bold">{title}</div>
-      </div>
-      <div className="me-auto">
-        <div className="fw-bold">{price}</div>
-      </div>
+      <div className="col-6 col-lg-10 fw-bold">{title}</div>
+      <div className="fw-bold flex-fill">${price}</div>
       <div className="controls">
-        <button className="btn btn-primary badge" onClick={()=>{ editTask(id) }}>Edit</button>
+        <button className="btn btn-primary badge me-1" onClick={()=>{ editTask(id) }}>Edit</button>
         <button className="btn btn-danger badge" onClick={()=>{ deleteTask(id) }}>Delete</button>
       </div>
     </li>

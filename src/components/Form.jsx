@@ -11,7 +11,7 @@ export default function Form() {
   const [editingId, setEditingId] = useState(null)
 
   const dispatch = useDispatch();
-  const tasks = useSelector(state => state.tasks);
+  const tasks = useSelector(state => state.tasks.tasks);
 
   useEffect(() => {
     const editing = tasks.filter(task => task.status === 'editing')

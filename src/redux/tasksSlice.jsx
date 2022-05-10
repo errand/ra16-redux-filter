@@ -2,25 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 import {nanoid} from "@reduxjs/toolkit";
 import { faker } from '@faker-js/faker';
 
+const fakeData = []
+for (let i = 0; i < 16; i++) {
+  fakeData.push({
+    id: nanoid(),
+    title: 	faker.hacker.phrase(),
+    price: faker.datatype.number().toString(),
+    status: ''
+  })
+}
+
 export const tasksSlice = createSlice({
   name: "tasks",
-  filter: null,
-  initialState: [{
-    id: nanoid(),
-    title: 	faker.hacker.phrase(),
-    price: faker.datatype.number().toString(),
-    status: ''
-  },{
-    id: nanoid(),
-    title: 	faker.hacker.phrase(),
-    price: faker.datatype.number().toString(),
-    status: ''
-  },{
-    id: nanoid(),
-    title: 	faker.hacker.phrase(),
-    price: faker.datatype.number().toString(),
-    status: ''
-  }],
+  initialState: {
+    tasks: fakeData,
+    filterKey: null
+  },
   reducers: {
     addAction: (state, action) => {
       const newTask = {
@@ -29,25 +26,25 @@ export const tasksSlice = createSlice({
         price: action.payload.price,
         status: action.payload.status
       }
-      state.push(newTask);
+      state.tasks.push(newTask);
     },
     deleteAction: (state, action) => {
-      return state.filter((item) => item.id !== action.payload.id);
+      state.tasks = state.tasks.filter((item) => item.id !== action.payload.id);
     },
     editAction: (state, action) => {
-      state.forEach(item => {
+      state.tasks.forEach(item => {
         if(item.status === 'editing') {
           item.status = ''
         }
       })
-      state.forEach(item => {
+      state.tasks.forEach(item => {
         if(item.id === action.payload.id) {
           item.status = 'editing'
         }
       })
     },
     changeAction: (state, action) => {
-      const item = state.find(item => item.id === action.payload.editingId)
+      const item = state.tasks.find(item => item.id === action.payload.editingId)
       if(item) {
         item.title = action.payload.title
         item.price = action.payload.price
@@ -59,11 +56,11 @@ export const tasksSlice = createSlice({
           price: action.payload.price,
           status: ''
         }
-        state.push(newTask);
+        state.tasks.push(newTask);
       }
     },
     filterAction: (state, action) => {
-      state.filter = action.payload.keyword
+      state.filterKey = action.payload.keyword
     }
   }
 });
