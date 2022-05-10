@@ -29,7 +29,6 @@ export default function Form() {
   const onSubmit = (event) => {
     event.preventDefault();
 
-
     if(title.trim().length === 0) {
       setMessage('Empty input is forbidden')
       setTitle('');
@@ -50,6 +49,7 @@ export default function Form() {
     setTitle('');
     setPrice('');
     setMessage('')
+    setEditing(false)
     setPriceMessage('')
   };
 
